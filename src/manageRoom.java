@@ -139,7 +139,16 @@ public class manageRoom extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:add room
+          String roomNo = jTextField1.getText();
+        String roomType =(String)jComboBox1.getSelectedItem();
+        String bed = (String)jComboBox2.getSelectedItem();
+        String price = jTextField2.getText();
+        
+        String Query="insert into room values('"+roomNo+"','"+roomType+"','"+bed+"','"+price+"','Not Booked')";
+        InsertUpdateDelete.setData(Query, "Succesfully Updated");
+        setVisible(false);
+        new manageRoom().setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -152,16 +161,8 @@ public class manageRoom extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here: add room
-        String roomNo = jTextField1.getText();
-        String roomType =(String)jComboBox1.getSelectedItem();
-        String bed = (String)jComboBox2.getSelectedItem();
-        String price = jTextField2.getText();
-        
-        String Query="insert into room values('"+roomNo+"','"+roomType+"','"+bed+"','"+price+"','Not Booked')";
-        InsertUpdateDelete.setData(Query, "Succesfully Updated");
-        setVisible(false);
-        new manageRoom().setVisible(true);
+        // TODO add your handling code here: 
+      
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
@@ -170,7 +171,10 @@ public class manageRoom extends javax.swing.JFrame {
        ResultSet rs = Select.getData("select * from room");
        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
        try{
-           
+           while(rs.next()){
+               model.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)});
+           }
+           rs.close();
        } catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
        }
