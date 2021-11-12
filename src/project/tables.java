@@ -18,8 +18,9 @@ public class tables {
         try{
             con = (Connection) ConnectionProvider.getCon();
             st=con.createStatement();
-              st.executeUpdate("CREATE TABLE users (name varchar(200),email varchar(200),password varchar(50),securityQuestion varchar(500),answer varchar(200),adress varchar(200),status varchar(20));");
-              st.executeUpdate("CREATE TABLE room(roomNo varchar(10),roomType varchar(200),bed varchar(200),price int,status varchar(20))");
+             st.executeUpdate("CREATE TABLE users (name varchar(200),email varchar(200),password varchar(50),securityQuestion varchar(500),answer varchar(200),adress varchar(200),status varchar(20));");
+             st.executeUpdate("CREATE TABLE room(roomNo varchar(10),roomType varchar(200),bed varchar(200),price int,status varchar(20))");
+             st.executeUpdate("CREATE TABLE customer(id int,name varchar(200),mobileNumber varchar(20),nationality varchar(200), gender varchar(50),email varchar(200),idProof varchar(200),address varchar(500),checkIn varchar(50),roomNo varchar(10),bed varchar(200),roomType varchar(200),pricePerDay int(10),numberOfDaysStay int(10),totalAmount varchar(200),checkOut varchar(50))");
 
            JOptionPane.showMessageDialog(null, "Table created Succesfully");
         } catch(Exception e){

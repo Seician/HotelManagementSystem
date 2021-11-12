@@ -1,3 +1,9 @@
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.sql.*;
+import javax.swing.JOptionPane;
+import project.*;
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -14,8 +20,33 @@ public class customerCheckIn extends javax.swing.JFrame {
      */
     public customerCheckIn() {
         initComponents();
+        jTextField7.setEditable(false);
+        jTextField8.setEditable(false);
+        SimpleDateFormat myFormat= new SimpleDateFormat("dd/MM/yyyy");
+        Calendar cal = Calendar.getInstance();
+        jTextField7.setText(myFormat.format(cal.getTime()));
+        
     }
-
+       String bed;
+       String roomType;
+       String roomNo;
+       String price;
+       
+       public void roomDetails(){
+           jComboBox4.removeAllItems();
+           jTextField8.setText("");
+           bed = (String)jComboBox2.getSelectedItem();
+           roomType=(String)jComboBox3.getSelectedItem();
+           
+           try{
+               ResultSet rs =Select.getData("select * from room where bed ='"+bed+"' and roomType='"+roomType+"' and status='Not Booked'");
+               while (rs.next()){
+                   jComboBox4.addItem(rs.getString(1));
+               }
+           }catch(Exception e){
+              JOptionPane.showMessageDialog(null, e); 
+           }
+       }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,6 +185,11 @@ public class customerCheckIn extends javax.swing.JFrame {
 
         jComboBox2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Single", "Double", "Triple", " " }));
+        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 241, 300, -1));
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -162,9 +198,19 @@ public class customerCheckIn extends javax.swing.JFrame {
 
         jComboBox3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "AC", "Non - AC" }));
+        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox3ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox3, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 311, 300, -1));
 
         jComboBox4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox4ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 392, 300, 23));
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -176,7 +222,7 @@ public class customerCheckIn extends javax.swing.JFrame {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 452, 88, -1));
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 489, 300, -1));
+        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 489, 300, 20));
 
         jButton2.setBackground(new java.awt.Color(102, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -187,7 +233,7 @@ public class customerCheckIn extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 562, -1, 21));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 530, -1, 21));
 
         jButton3.setBackground(new java.awt.Color(102, 0, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -198,7 +244,7 @@ public class customerCheckIn extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 596, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 530, -1, -1));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all pages background.png"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -220,16 +266,75 @@ public class customerCheckIn extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        int id = 1;
+        String name = jTextField1.getText();
+        String mobileNumber = jTextField2.getText();
+        String nationality = jTextField3.getText();
+        String gender =(String) jComboBox1.getSelectedItem();
+        String email = jTextField4.getText();
+        String idProof = jTextField5.getText();
+        String address = jTextField4.getText();
+        String checkIn = jTextField7.getText();
+        String bed =(String) jComboBox2.getSelectedItem();
+        String roomType =(String) jComboBox3.getSelectedItem();
+        String roomNo =(String) jComboBox4.getSelectedItem();
+        String price =(String) jTextField8.getText();
+        String Query ="select max(id) from customer";
+        
+        try{
+            ResultSet rs = Select.getData(Query);
+            while(rs.next()){
+                id=rs.getInt(1);
+                id= id+1;
+                if(!price.equals("")){
+                    Query ="update room set status='Booked' where roomNo='"+roomNo+"'";
+                    InsertUpdateDelete.setData(Query, "");
+                    Query="insert into customer(id,name,mobileNumber,nationality,gender,email,idProof,address,checkIn,roomNo,bed,roomType,pricePerDay) values("+id+","+name+","+mobileNumber+","+nationality+","+gender+","+email+","+idProof+","+address+","+checkIn+","+roomNo+","+bed+","+roomType+","+price+"')";
+                    InsertUpdateDelete.setData(Query,"Customer Check In Successfully");
+                    setVisible(false);
+                    new customerCheckIn().setVisible(true);
+                }
+            }
+        }
+           catch(Exception e){
+                  JOptionPane.showMessageDialog(null, e);  
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        setVisible(false);
+        new customerCheckIn().setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+        roomDetails();
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        // TODO add your handling code here:
+        roomDetails();
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        // TODO add your handling code here:
+        roomNo=(String)jComboBox4.getSelectedItem();
+        
+        try{
+            ResultSet rs = Select.getData("select * from room where roomNo='"+roomNo+"'");
+            while(rs.next()){
+                jTextField8.setText(rs.getString(4));
+            }
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     /**
      * @param args the command line arguments
