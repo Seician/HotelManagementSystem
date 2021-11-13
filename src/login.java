@@ -41,9 +41,9 @@ public class login extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setLocation(new java.awt.Point(50, 118));
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -115,10 +115,8 @@ public class login extends javax.swing.JFrame {
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1330, 20, 30, -1));
 
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/login.PNG"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -20, 1420, 800));
-
-        jRadioButton1.setText("jRadioButton1");
-        getContentPane().add(jRadioButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, -1, -1));
+        jLabel4.setText("jLabel4");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -141,7 +139,7 @@ public class login extends javax.swing.JFrame {
             setVisible(false);
             new adminHome().setVisible(true);
         } else {
-            ResultSet rs = Select.getData("select * from users where email='"+email+"' and' password='"+password+"'");
+            ResultSet rs = Select.getData("select * from users where email='"+email+"' and password='"+password+"'");
             try {
                 if(rs.next()){
                     check = 1;
@@ -225,7 +223,6 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

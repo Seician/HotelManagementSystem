@@ -174,7 +174,7 @@ public class customerCheckIn extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel9.setText("Check In Date (Today)");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 358, 110, -1));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 358, 190, -1));
 
         jTextField7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(482, 392, 300, -1));
@@ -222,7 +222,7 @@ public class customerCheckIn extends javax.swing.JFrame {
         getContentPane().add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 452, 88, -1));
 
         jTextField8.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 489, 300, 20));
+        getContentPane().add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(882, 479, 300, 30));
 
         jButton2.setBackground(new java.awt.Color(102, 0, 0));
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -233,7 +233,7 @@ public class customerCheckIn extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 530, -1, 21));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 530, -1, 30));
 
         jButton3.setBackground(new java.awt.Color(102, 0, 0));
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -244,7 +244,7 @@ public class customerCheckIn extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 530, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 530, -1, 30));
 
         jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/all pages background.png"))); // NOI18N
         getContentPane().add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -289,7 +289,7 @@ public class customerCheckIn extends javax.swing.JFrame {
                 if(!price.equals("")){
                     Query ="update room set status='Booked' where roomNo='"+roomNo+"'";
                     InsertUpdateDelete.setData(Query, "");
-                    Query="insert into customer(id,name,mobileNumber,nationality,gender,email,idProof,address,checkIn,roomNo,bed,roomType,pricePerDay) values("+id+","+name+","+mobileNumber+","+nationality+","+gender+","+email+","+idProof+","+address+","+checkIn+","+roomNo+","+bed+","+roomType+","+price+"')";
+                    Query="INSERT INTO customer(id,name,mobileNumber,nationality,gender,email,idProof,address,checkIn,roomNo,bed,roomType,pricePerDay) VALUES ("+id+","+name+","+mobileNumber+","+nationality+","+gender+","+email+","+idProof+","+address+","+checkIn+","+roomNo+","+bed+","+roomType+","+price+"')";
                     InsertUpdateDelete.setData(Query,"Customer Check In Successfully");
                     setVisible(false);
                     new customerCheckIn().setVisible(true);
